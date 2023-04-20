@@ -27,6 +27,7 @@ namespace MyToDo.ViewModels
         private readonly IToDoService todoService;
         private readonly IMemoService memoService;
         private readonly IEventAggregator aggregator;
+        private IRegionNavigationJournal journal;
         #endregion
         public IndexViewModel(SharedData sharedate, IContainerProvider containerProvider, IDialogHostService dialog, IDialogService prismDialogService) : base(containerProvider)
         {
@@ -34,6 +35,7 @@ namespace MyToDo.ViewModels
             //CreateTestData();
             ExecuteCommand = new DelegateCommand<string>(Execute);
             this.sharedate = sharedate;
+            this.journal = sharedate.journal;
             //sharedate.ToDoListUpdated += (sender, args) =>
             //{
 
@@ -64,7 +66,10 @@ namespace MyToDo.ViewModels
             {
                 param.Add("Value", 0);
             }
-            regionManager.Regions[PrismManager.MainViewRegionName].RequestNavigate(obj.Target, param);
+            regionManager.Regions[PrismManager.MainViewRegionName].RequestNavigate(obj.Target,  callback =>
+            {
+                journal = callback.Context.NavigationService.Journal;
+            },param);
         }
 
         private async void Completed(ToDoDto obj)

@@ -30,31 +30,26 @@ namespace MyToDo.ViewModels
                 App.Logout(container);
             });
             this.sharedData = sharedData;
-            this.regionManager = regionManager;
+            this.journal = sharedData.journal;
+            this.regionManager = regionManager;        
             CreateMenuBar();
         }
          
 
         private void GoBack()
         {
-            GoBackCommand = new DelegateCommand(() =>
-            {
                 if (journal!=null && journal.CanGoBack)
                 {
                     journal.GoBack();
                 }
-            });
         }
 
         private void GoForward()
         {
-            GoForwardCommand = new DelegateCommand(() =>
-            {
                 if (journal != null && journal.CanGoForward)
                 {
                     journal.GoForward();
                 }
-            });
         }
 
         private void Navigate(MenuBar obj)

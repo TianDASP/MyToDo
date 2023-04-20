@@ -18,7 +18,7 @@ namespace MyToDo.ViewModels
     public class NavigationViewModel : BindableBase,  INavigationAware
     {
         private readonly IContainerProvider containerProvider;
-        private readonly IEventAggregator eventAggregator;
+        private readonly IEventAggregator eventAggregator; 
 
         public NavigationViewModel(IContainerProvider containerProvider )
         {
@@ -38,7 +38,7 @@ namespace MyToDo.ViewModels
 
         public virtual void OnNavigatedTo(NavigationContext navigationContext)
         {
-             
+            //journal = navigationContext.NavigationService.Journal;
         }
 
         public void UpdateLoading(bool isOpen)
