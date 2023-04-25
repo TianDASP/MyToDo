@@ -43,7 +43,7 @@
                         FontWeight="Bold"
                         Text="欢迎使用" />
                     <TextBox
-                        Margin="0,10"
+                        Margin="0,10" x:Name="LoginTb"
                         md:HintAssist.Hint="请输入账号"
                         DockPanel.Dock="Top"
                         Text="{Binding Account}" />

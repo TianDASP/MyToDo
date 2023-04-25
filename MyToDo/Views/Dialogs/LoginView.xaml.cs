@@ -31,6 +31,7 @@ namespace MyToDo.Views.Dialogs
             {
                 this.LoginSnackBar?.MessageQueue?.Enqueue(arg.Message);
             }, "login");
+            this.LoginTb.Focus();
         }
     }   
 }

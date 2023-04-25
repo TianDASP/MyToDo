@@ -102,6 +102,9 @@ namespace MyToDo.ViewModels
                         {
                             ToDoDtos.Add(apiResponse.Content);
                         }
+                    }else
+                    {
+                        ToDoDtos.Add(apiResponse.Content);
                     }
                 }
             }
