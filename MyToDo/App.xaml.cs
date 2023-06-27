@@ -1,6 +1,8 @@
 ﻿using DryIoc;
+using MaterialDesignThemes.Wpf;
 using MyToDo.Common;
 using MyToDo.Common.Models;
+using MyToDo.Extensions;
 using MyToDo.Service;
 using MyToDo.ViewModels;
 using MyToDo.ViewModels.Dialogs;
@@ -8,6 +10,7 @@ using MyToDo.Views;
 using MyToDo.Views.Dialogs;
 using Prism.DryIoc;
 using Prism.Ioc;
+using Prism.Regions;
 using Prism.Services.Dialogs;
 using System;
 using System.Collections.Generic;
@@ -23,7 +26,7 @@ namespace MyToDo
     /// Interaction logic for App.xaml
     /// </summary>
     public partial class App : PrismApplication
-    {
+    { 
         protected override Window CreateShell()
         {
             return Container.Resolve<MainView>();
@@ -80,7 +83,7 @@ namespace MyToDo
             containerRegistry.Register<ILoginService, LoginService>();
             containerRegistry.Register<IToDoService, ToDoService>();
             containerRegistry.Register<IMemoService, MemoService>();
-            containerRegistry.Register<IDialogHostService, DialogHostService>();
+            containerRegistry.Register<IDialogHostService, DialogHostService>(); 
 
 
             containerRegistry.RegisterForNavigation<IndexView, IndexViewModel>();

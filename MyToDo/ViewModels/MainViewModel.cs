@@ -1,8 +1,10 @@
-﻿using MyToDo.Common;
+﻿using DryIoc;
+using MyToDo.Common;
 using MyToDo.Common.Models;
-using MyToDo.Extensions;
+using MyToDo.Extensions; 
 using MyToDo.Service;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Ioc;
 using Prism.Mvvm;
 using Prism.Regions;
@@ -12,15 +14,16 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace MyToDo.ViewModels
 {
-    class MainViewModel : BindableBase ,IConfigureService
+    class MainViewModel : BindableBase, IConfigureService
     {
         private readonly SharedData sharedData;
-        private readonly IRegionManager regionManager; 
+        private readonly IRegionManager regionManager;
 
-        public MainViewModel(SharedData sharedData,IRegionManager regionManager,IContainerProvider container )
+        public MainViewModel(SharedData sharedData, IRegionManager regionManager, IContainerProvider container)
         {
             NavigateCommand = new DelegateCommand<MenuBar>(Navigate);
             GoBackCommand = new DelegateCommand(GoBack);
@@ -31,50 +34,52 @@ namespace MyToDo.ViewModels
             });
             this.sharedData = sharedData;
             this.journal = sharedData.journal;
-            this.regionManager = regionManager;        
+            this.regionManager = regionManager;
             CreateMenuBar();
         }
-         
+
 
         private void GoBack()
         {
-                if (journal!=null && journal.CanGoBack)
-                {
-                    journal.GoBack();
-                }
+            if (journal != null && journal.CanGoBack)
+            {
+                journal.GoBack(); 
+            }
         }
 
         private void GoForward()
         {
-                if (journal != null && journal.CanGoForward)
-                {
-                    journal.GoForward();
-                }
+            if (journal != null && journal.CanGoForward)
+            {
+                journal.GoForward();
+            }
         }
 
         private void Navigate(MenuBar obj)
         {
             if (obj == null || string.IsNullOrEmpty(obj.NameSpace))
                 return;
-            // 导航到 obj对应的View
-            regionManager.Regions[PrismManager.MainViewRegionName].RequestNavigate(obj.NameSpace, callback=>
+            // 导航到 obj对应的View 
+                
+            //System.Windows.MessageBox.Show("listBox_SelectionChanged触发 " + "即将导航至" + obj.Title + "  " + obj.NameSpace );
+            regionManager.Regions[PrismManager.MainViewRegionName].RequestNavigate(obj.NameSpace, callback =>
             {
                 journal = callback.Context.NavigationService.Journal;
-            }); 
+            });
         }
 
         public ObservableCollection<MenuBar> MenuBars { get; set; } = new ObservableCollection<MenuBar>();
         public DelegateCommand<MenuBar> NavigateCommand { get; private set; }
         public DelegateCommand GoBackCommand { get; private set; }
         public DelegateCommand GoForwardCommand { get; private set; }
-        public DelegateCommand LogoutCommand { get;private set; }
+        public DelegateCommand LogoutCommand { get; private set; }
         private IRegionNavigationJournal journal;
         private string userName;
 
         public string UserName
         {
             get { return userName; }
-            set { userName = value;RaisePropertyChanged();  }
+            set { userName = value; RaisePropertyChanged(); }
         }
 
         void CreateMenuBar()

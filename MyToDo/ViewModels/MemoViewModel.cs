@@ -246,7 +246,9 @@ namespace MyToDo.ViewModels
                 await GetDataListAsync();
             }
             Query();
-            base.OnNavigatedTo(navigationContext);
+            //base.eventAggregator.SendMenubarUpdateMessage("备忘录", "MemoView");
+            base.OnNavigatedTo(navigationContext); 
+
         }
     }
 

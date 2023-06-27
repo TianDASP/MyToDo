@@ -12,6 +12,7 @@ namespace MyToDo.Extensions
 {
     /// <summary>
     /// 为PasswordBox控件创建依赖属性
+    /// 0: 在PasswordBehavior中定义PasswordBox的密码变化事件
     /// 1: 输入框输入 PasswordBox的Password属性(非依赖)变化,触发事件
     /// 2: 事件中将Password属性赋值给自定义的依赖属性
     /// 3: 自定义依赖属性将值同步到ViewModel里的Password属性

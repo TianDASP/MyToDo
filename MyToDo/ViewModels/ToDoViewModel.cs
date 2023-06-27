@@ -14,6 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MyToDo.Extensions;
+using MyToDo.Views;
 
 namespace MyToDo.ViewModels
 {
@@ -261,7 +262,9 @@ namespace MyToDo.ViewModels
                 SelectedStatus = navigationContext.Parameters.GetValue<int>("Value");
             } 
             Query();
+            //base.eventAggregator.SendMenubarUpdateMessage("待办事项", "ToDoView");
             base.OnNavigatedTo(navigationContext);
+             
         }
     }
 }

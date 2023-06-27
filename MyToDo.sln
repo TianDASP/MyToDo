@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyToDoWebAPI", "MyToDoWebAP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyToDo.Shared", "MyToDo.Shared\MyToDo.Shared.csproj", "{7BAC9DB8-A575-4832-ACD5-A345A7AC06EF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismAppDemo", "PrismAppDemo\PrismAppDemo.csproj", "{0F4E1D4F-86FE-4FE3-BAFA-D29EF0C318BD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{7BAC9DB8-A575-4832-ACD5-A345A7AC06EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7BAC9DB8-A575-4832-ACD5-A345A7AC06EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7BAC9DB8-A575-4832-ACD5-A345A7AC06EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F4E1D4F-86FE-4FE3-BAFA-D29EF0C318BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F4E1D4F-86FE-4FE3-BAFA-D29EF0C318BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F4E1D4F-86FE-4FE3-BAFA-D29EF0C318BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F4E1D4F-86FE-4FE3-BAFA-D29EF0C318BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

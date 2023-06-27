@@ -25,8 +25,7 @@ namespace MyToDo.ViewModels
         private readonly IDialogHostService dialog;
         private readonly IDialogService prismDialogService;
         private readonly IToDoService todoService;
-        private readonly IMemoService memoService;
-        private readonly IEventAggregator aggregator;
+        private readonly IMemoService memoService; 
         private IRegionNavigationJournal journal;
         #endregion
         public IndexViewModel(SharedData sharedate, IContainerProvider containerProvider, IDialogHostService dialog, IDialogService prismDialogService) : base(containerProvider)
@@ -42,8 +41,7 @@ namespace MyToDo.ViewModels
             //};
             this.dialog = dialog;
 
-            this.prismDialogService = prismDialogService;
-            aggregator = containerProvider.Resolve<IEventAggregator>();
+            this.prismDialogService = prismDialogService; 
             regionManager = containerProvider.Resolve<IRegionManager>();
             todoService = containerProvider.Resolve<IToDoService>();
             memoService = containerProvider.Resolve<IMemoService>();
@@ -53,7 +51,7 @@ namespace MyToDo.ViewModels
             NavigateCommand = new DelegateCommand<TaskBar>(Navigate);
             //InitData();
         }
-
+         
         private void Navigate(TaskBar obj)
         {
             if (string.IsNullOrEmpty(obj.Target)) return;
@@ -70,6 +68,8 @@ namespace MyToDo.ViewModels
             {
                 journal = callback.Context.NavigationService.Journal;
             },param);
+
+
         }
 
         private async void Completed(ToDoDto obj)
@@ -81,7 +81,7 @@ namespace MyToDo.ViewModels
                 {
                     ToDoDtos.Remove(obj);
                     CalTaskBarsData();
-                    aggregator.SendMessage("已完成!");
+                    base.eventAggregator.SendMessage("已完成!");
                 }
                 else
                 {
@@ -168,7 +168,7 @@ namespace MyToDo.ViewModels
                         toDoDto = updateRes.Content;
                         if (toDoDto.Status == true)
                             ToDoDtos.Remove(ToDoDtos.FirstOrDefault(x => x.Id == toDoDto.Id)!);
-                        aggregator.SendMessage("已完成!");
+                        base.eventAggregator.SendMessage("已完成!");
                     }
                 }
                 else
@@ -281,7 +281,9 @@ namespace MyToDo.ViewModels
             ToDoDtos.AddRange(RealToDoDtos.Where(x => x.Status == false));
             MemoDtos = sharedate.RealMemoDtos;
             InitData();
+            //base.eventAggregator.SendMenubarUpdateMessage("首页", "IndexView");
             base.OnNavigatedTo(navigationContext);
+
         }
         private void CalTaskBarsData()
         {

@@ -1,4 +1,5 @@
-﻿using Prism.Mvvm;
+﻿ 
+using Prism.Mvvm;
 using Prism.Regions;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,7 @@ namespace MyToDo.Common.Models
         public ObservableCollection<ToDoDto> RealToDoDtos { get; set; } = new ObservableCollection<ToDoDto>();
         public ObservableCollection<MemoDto> RealMemoDtos { get; set; } = new ObservableCollection<MemoDto>();
 
-        public IRegionNavigationJournal journal { get; set; }
+        public IRegionNavigationJournal journal { get; set; } 
         public void Init()
         {
             IsToDoDtosInited = false;

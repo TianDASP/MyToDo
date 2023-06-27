@@ -75,5 +75,20 @@ namespace MyToDo.Extensions
                 Filter = filterName,
             });
         } 
+
+
+        public static void RegisterUpdateMenubarEvent(this IEventAggregator aggregator, Action<UpdateMenubarModel> action)
+        {
+            aggregator.GetEvent<UpdateMenubarEvent>().Subscribe(action);
+        }
+
+        public static void SendMenubarUpdateMessage(this IEventAggregator aggregator, string title, string _namespace)
+        {
+            aggregator.GetEvent<UpdateMenubarEvent>().Publish(new UpdateMenubarModel()
+            {
+                Title = title,
+                NameSpace = _namespace,
+            });
+        }
     }
 }
