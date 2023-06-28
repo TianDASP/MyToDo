@@ -25,8 +25,9 @@ namespace MyToDo.Views
     public partial class MainView : System.Windows.Window
     {
         private readonly IRegionManager regionManager;
-        private readonly IDialogHostService dialogHost; 
-         
+        private readonly IDialogHostService dialogHost;
+        private double dpi倍数;
+
         public MainView(IRegionManager regionManager, IEventAggregator aggregator, IDialogHostService dialogHost)
         {
             InitializeComponent();
@@ -79,19 +80,52 @@ namespace MyToDo.Views
             if (this.WindowState == WindowState.Maximized)
             {
                 SystemCommands.RestoreWindow(this);
+                rootGrid.Margin = new Thickness(0);
             }
             else
             {
-                SystemCommands.MaximizeWindow(this);
+                SystemCommands.MaximizeWindow(this); 
+                rootGrid.Margin = new Thickness(8 / dpi倍数);
             }
         }
 
         private async void btnClose_Click(object sender, RoutedEventArgs e)
-        { 
+        {
             var dialogResult = await dialogHost.Question("温馨提示", $"确认退出系统?");
             if (dialogResult?.Result == Prism.Services.Dialogs.ButtonResult.OK)
             {
                 SystemCommands.CloseWindow(this);
+            }
+        }
+         
+
+        private void avatar_DpiChanged(object sender, System.Windows.DpiChangedEventArgs e)
+        {
+            Image image = (Image)sender;
+            var x = VisualTreeHelper.GetDpi(image);
+            dpi倍数 = x.PixelsPerDip; 
+        }
+
+        private void BindDpiChangedAction(object sender, EventArgs e)
+        {
+            Image image = sender as Image;
+            image.DpiChanged += avatar_DpiChanged;
+        }
+
+        private void Window_StateChanged(object sender, EventArgs e)
+        {
+            var window = sender as System.Windows.Window;
+            if(window != null)
+            {
+                if(window.WindowState == WindowState.Maximized)
+                { 
+                    rootGrid.Margin = new Thickness(8 / dpi倍数);
+                }
+                else
+                {
+
+                    rootGrid.Margin = new Thickness(0);
+                }
             }
         }
     }
