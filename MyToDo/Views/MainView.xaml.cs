@@ -96,22 +96,9 @@ namespace MyToDo.Views
             {
                 SystemCommands.CloseWindow(this);
             }
-        }
+        } 
          
-
-        private void avatar_DpiChanged(object sender, System.Windows.DpiChangedEventArgs e)
-        {
-            Image image = (Image)sender;
-            var x = VisualTreeHelper.GetDpi(image);
-            dpi倍数 = x.PixelsPerDip; 
-        }
-
-        private void BindDpiChangedAction(object sender, EventArgs e)
-        {
-            Image image = sender as Image;
-            image.DpiChanged += avatar_DpiChanged;
-        }
-
+           
         private void Window_StateChanged(object sender, EventArgs e)
         {
             var window = sender as System.Windows.Window;
@@ -122,10 +109,20 @@ namespace MyToDo.Views
                     rootGrid.Margin = new Thickness(8 / dpi倍数);
                 }
                 else
-                {
-
+                { 
                     rootGrid.Margin = new Thickness(0);
                 }
+            }
+        }
+
+        private void Window_DpiChanged(object sender, System.Windows.DpiChangedEventArgs e)
+        {
+            System.Windows.Window window = sender as System.Windows.Window;
+            var x = VisualTreeHelper.GetDpi(window);
+            dpi倍数 = x.PixelsPerDip;
+            if (this.WindowState == WindowState.Maximized)
+            {
+                rootGrid.Margin = new Thickness(8 / dpi倍数);
             }
         }
     }
